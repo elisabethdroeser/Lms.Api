@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Api", "Lms.Api\Lms.Api.csproj", "{7DCA4531-34DE-40B7-B382-BAA4D4BF9037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Data", "Lms.Data\Lms.Data.csproj", "{DEBF7760-094A-443F-A5F8-BC407FE3497B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Core", "Lms.Core\Lms.Core.csproj", "{A65423EB-9C92-4377-AD07-1CEAA65B1670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DCA4531-34DE-40B7-B382-BAA4D4BF9037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DCA4531-34DE-40B7-B382-BAA4D4BF9037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DCA4531-34DE-40B7-B382-BAA4D4BF9037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DCA4531-34DE-40B7-B382-BAA4D4BF9037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEBF7760-094A-443F-A5F8-BC407FE3497B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEBF7760-094A-443F-A5F8-BC407FE3497B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEBF7760-094A-443F-A5F8-BC407FE3497B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEBF7760-094A-443F-A5F8-BC407FE3497B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65423EB-9C92-4377-AD07-1CEAA65B1670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65423EB-9C92-4377-AD07-1CEAA65B1670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65423EB-9C92-4377-AD07-1CEAA65B1670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65423EB-9C92-4377-AD07-1CEAA65B1670}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC492E54-4BA6-472F-8D58-A3F8EEA8BFDF}
+	EndGlobalSection
+EndGlobal
