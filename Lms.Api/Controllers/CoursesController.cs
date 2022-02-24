@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Data;
 using Lms.Core.Entities;
+using Lms.Data.Data;
 
 namespace Lms.Api.Controllers
 {
