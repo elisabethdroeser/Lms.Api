@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<LmsApiContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("LmsApiContext")));
 
 // Add services to the container.
 
