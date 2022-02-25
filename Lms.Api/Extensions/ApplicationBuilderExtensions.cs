@@ -1,48 +1,35 @@
-﻿using Bogus;
-using Lms.Core.Entities;
-using Lms.Data.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Lms.Data.Data;
 
 namespace Lms.Api.Extensions
 {
+
     public static class ApplicationBuilderExtensions
     {
-        private static Faker faker;
-   
-        public static async Task InitAsync(LmsApiContext db)
+        public static async Task<IApplicationBuilder> SeedDataAsync(this IApplicationBuilder app)
         {
-            if (await db.Course.AnyAsync()) return;
 
-            faker = new Faker("sv");
-
-            var courses = GetCourses();
-            await db.AddRangeAsync(courses);
-
-            var modules = GetModules();
-            await db.AddRangeAsync(modules);
-
-            await db.SaveChangesAsync();
-        }
-
-        private static IEnumerable<Course> GetCourses()
-        {
-            var courses = new List<Course>();   
-            for (int i = 0; i < 10; i++)
+            using (var scope = app.ApplicationServices.CreateScope())
             {
-                var course = new Course
+                var serviceProvider = scope.ServiceProvider;
+                var db = serviceProvider.GetRequiredService<LmsApiContext>();
+
+                //db.Database.EnsureDeleted();
+                //db.Database.Migrate();
+
+                try
                 {
-                    Title = faker.C();
+                    await SeedData.InitAsync(db);
+                }
+                catch (Exception e)
+                {
+                    var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(string.Join(" ", e.Message));
+                    //throw;
                 }
             }
 
-
+            return app;
         }
-
-        private static object GetModules()
-        {
-            throw new NotImplementedException();
-        }
-
-     
     }
+
 }

@@ -13,6 +13,7 @@ namespace Lms.Data.Data
         public LmsApiContext (DbContextOptions<LmsApiContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Lms.Core.Entities.Course> Course { get; set; }
