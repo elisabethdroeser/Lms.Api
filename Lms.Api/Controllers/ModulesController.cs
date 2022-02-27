@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Lms.Core.Entities;
 using Lms.Data.Data;
 using AutoMapper;
+using Lms.Core.Dto;
 
 namespace Lms.Api.Controllers
 {
@@ -27,9 +28,10 @@ namespace Lms.Api.Controllers
 
         // GET: api/Modules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Module>>> GetModule()
+        public async Task<ActionResult<IEnumerable<ModuleDto>>> GetModule()
         {
-            return await _context.Module.ToListAsync();
+            var moduleDto = _mapper.ProjectTo<ModuleDto>(_context.Module);
+            return await moduleDto.ToListAsync();
         }
 
         // GET: api/Modules/5
