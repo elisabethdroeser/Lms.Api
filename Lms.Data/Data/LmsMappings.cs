@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Lms.Core.Dto;
+using Lms.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,10 @@ namespace Lms.Data.Data
 {
     public class LmsMappings : Profile
     {
+     public LmsMappings()
+        {
+            CreateMap<Course, CourseDto>().ReverseMap();
+            CreateMap<Module, ModuleDto>().ReverseMap();
+        }
     }
 }

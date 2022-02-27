@@ -18,6 +18,7 @@ builder.Services.AddControllers(opt => opt.ReturnHttpNotAcceptable = true)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(LmsApiContext));
+builder.Services.AddAutoMapper(typeof(LmsMappings));
 
 var app = builder.Build();
 
