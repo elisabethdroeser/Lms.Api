@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 #nullable disable
 namespace Lms.Core.Dto
 {
-    public class ModuleCreateDto
+    public class CourseUpdateDto
     {
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
-        public int CourseId { get; set; }
     }
 }

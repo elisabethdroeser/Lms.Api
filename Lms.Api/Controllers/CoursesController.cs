@@ -52,30 +52,17 @@ namespace Lms.Api.Controllers
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, CourseUpdateDto courseUpdateDto)
         {
-            if (id != course.Id)
+            var courseUpdate = await _context.Course.FindAsync(id);
+
+            if (courseUpdate == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _mapper.Map(courseUpdateDto, courseUpdate);
+            _context.SaveChanges();
 
             return NoContent();
         }
