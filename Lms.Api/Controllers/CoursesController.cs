@@ -83,12 +83,14 @@ namespace Lms.Api.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Course>> PostCourse(CourseCreateDto courseCreateDto)
         {
+            var course = _mapper.Map<Course>(courseCreateDto);
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            var courseDto = _mapper.Map<CourseDto>(course);
+            return CreatedAtAction("GetCourse", new { id = course.Id }, courseCreateDto);
         }
 
         // DELETE: api/Courses/5

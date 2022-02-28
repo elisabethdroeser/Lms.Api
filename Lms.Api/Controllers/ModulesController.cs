@@ -82,12 +82,22 @@ namespace Lms.Api.Controllers
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Module>> PostModule(Module @module)
+        public async Task<ActionResult<Module>> PostModule(ModuleCreateDto moduleCreateDto)
         {
-            _context.Module.Add(@module);
-            await _context.SaveChangesAsync();
+            {
+                var module = _mapper.Map<Module>(moduleCreateDto);
 
-            return CreatedAtAction("GetModule", new { id = @module.Id }, @module);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                _context.Module.Add(module);
+                await _context.SaveChangesAsync();
+
+                var moduleDto = _mapper.Map<ModuleDto>(module);
+                return CreatedAtAction("GetModule", new { id = module.Id }, moduleCreateDto);
+            }
         }
 
         // DELETE: api/Modules/5
