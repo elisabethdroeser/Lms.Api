@@ -36,16 +36,16 @@ namespace Lms.Api.Controllers
 
         // GET: api/Modules/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Module>> GetModule(int id)
+        public async Task<ActionResult<ModuleDto>> GetModule(int id)
         {
-            var @module = await _context.Module.FindAsync(id);
+            var module = await _context.Module.FindAsync(id);
 
-            if (@module == null)
+            if (module == null)
             {
                 return NotFound();
             }
 
-            return @module;
+            return _mapper.Map<ModuleDto>(module);
         }
 
         // PUT: api/Modules/5

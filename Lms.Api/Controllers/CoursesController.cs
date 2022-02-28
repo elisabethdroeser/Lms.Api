@@ -31,12 +31,13 @@ namespace Lms.Api.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourse()
         {
             var courseDto = _mapper.ProjectTo<CourseDto>(_context.Course);
+
             return await courseDto.ToListAsync(); 
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
             var course = await _context.Course.FindAsync(id);
 
@@ -45,7 +46,7 @@ namespace Lms.Api.Controllers
                 return NotFound();
             }
 
-            return course;
+            return _mapper.Map<CourseDto>(course);
         }
 
         // PUT: api/Courses/5
