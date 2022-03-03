@@ -73,6 +73,7 @@ namespace Lms.Api.Controllers
         public async Task<ActionResult<Course>> PostCourse(CourseCreateDto courseCreateDto)
         {
             var course = _mapper.Map<Course>(courseCreateDto);
+
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 
