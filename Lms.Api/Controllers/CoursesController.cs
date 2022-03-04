@@ -10,6 +10,7 @@ using Lms.Core.Entities;
 using Lms.Data.Data;
 using AutoMapper;
 using Lms.Core.Dto;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Lms.Api.Controllers
 {
@@ -75,10 +76,33 @@ namespace Lms.Api.Controllers
             var course = _mapper.Map<Course>(courseCreateDto);
 
             _context.Course.Add(course);
+
             await _context.SaveChangesAsync();
 
             var courseDto = _mapper.Map<CourseDto>(course);
+
             return CreatedAtAction("GetCourse", new { id = course.Id }, courseCreateDto);
+        }
+
+        //PATCH: 
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<CourseUpdateDto>> PatchCourse(int id, JsonPatchDocument<CourseUpdateDto> patchDocument)
+        {
+            var courseToUpdate = await _context.Course.FindAsync(id);
+            
+            if (courseToUpdate == null) { return NotFound(); }
+
+            var dto = _mapper.Map<CourseUpdateDto>(courseToUpdate);
+
+            patchDocument.ApplyTo(dto, ModelState);
+
+            if (!TryValidateModel(dto)) { return BadRequest(ModelState); }
+
+            _mapper.Map(dto, courseToUpdate);
+            
+            await _context.SaveChangesAsync();
+
+            return Ok(_mapper.Map<CourseDto>(courseToUpdate));
         }
 
         // DELETE: api/Courses/5
@@ -96,10 +120,6 @@ namespace Lms.Api.Controllers
 
             return NoContent();
         }
-
-        private bool CourseExists(int id)
-        {
-            return _context.Course.Any(e => e.Id == id);
-        }
+        
     }
 }
