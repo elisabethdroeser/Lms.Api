@@ -10,6 +10,7 @@ using Lms.Core.Entities;
 using Lms.Data.Data;
 using AutoMapper;
 using Lms.Core.Dto;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Lms.Api.Controllers
 {
@@ -84,6 +85,27 @@ namespace Lms.Api.Controllers
                 var moduleDto = _mapper.Map<ModuleDto>(module);
                 return CreatedAtAction("GetModule", new { id = module.Id }, moduleCreateDto);
             }
+        }
+        
+        //PATCH: 
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<ModuleUpdateDto>> PatchCourse(int id, JsonPatchDocument<ModuleUpdateDto> patchDocument)
+        {
+            var moduleToUpdate = await _context.Module.FindAsync(id);
+
+            if (moduleToUpdate == null) { return NotFound(); }
+
+            var dto = _mapper.Map<ModuleUpdateDto>(moduleToUpdate);
+
+            patchDocument.ApplyTo(dto, ModelState);
+
+            if (!TryValidateModel(dto)) { return BadRequest(ModelState); }
+
+            _mapper.Map(dto, moduleToUpdate);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(_mapper.Map<ModuleDto>(moduleToUpdate));
         }
 
         // DELETE: api/Modules/5
